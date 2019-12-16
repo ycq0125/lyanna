@@ -9,7 +9,7 @@ from tortoise.exceptions import IntegrityError
 from config import HERE
 from ext import init_db
 from models import create_user
-from models.base import get_redis
+from models.mixin import get_redis
 from models.blog import PAGEVIEW_FIELD, RK_ALL_POST_IDS, RK_PAGEVIEW
 
 
@@ -134,7 +134,8 @@ def build_css():
                           'widget.css'],
         'topic.min.css': ['main.min.css', 'topic.css'],
         'post.min.css': ['main.min.css', 'post.css', 'react.css',
-                         'gitment.css', 'dracula.css', 'social-sharer.css']
+                         'gitment.css', 'dracula.css', 'social-sharer.css'],
+        'activity.min.css': ['main.min.css', 'activity.css'],
     }
     css_map: Dict[str, str] = {}
     css_dir = Path(HERE) / 'static/css/'

@@ -47,7 +47,15 @@ const config = {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"
-    })]
+    })],
+  resolve: {
+      alias: {
+        'load-image': 'blueimp-load-image/js/load-image.js',
+        'load-image-scale': 'blueimp-load-image/js/load-image-scale.js',
+        'load-image-exif': 'blueimp-load-image/js/load-image-exif.js',
+        'load-image-meta': 'blueimp-load-image/js/load-image-meta.js'
+    }
+  }
 }
 
 module.exports = config

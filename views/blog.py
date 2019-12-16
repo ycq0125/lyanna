@@ -188,3 +188,9 @@ async def topic(request: Request, ident: str):
     topic = await SpecialTopic.cache(ident)
     posts = await topic.get_post_items()  # type: ignore
     return {'topic': topic, 'posts': [await p.to_sync_dict() for p in posts]}
+
+
+@bp.route('/activities')
+@mako.template('activities.html')
+async def activities(request: Request):
+    return {}

@@ -1,0 +1,61 @@
+<%inherit file="/base.html" />
+
+<%!
+    from config import SITE_TITLE
+%>
+
+<%def name="doc_head()">
+  <link rel="stylesheet" href="${ app.url_for('static', filename='css/activity.min.css') } ">
+</%def>
+
+<%def name="content()">
+<div id="activities">
+  <div class="create-activity">
+    <form id="fileupload" class="create-form" name="form" method="post" action="/activities" enctype="multipart/form-data">
+      <ul class="activity-tab">
+        <li class="status active"><a data-action="status" href="javascript:void(0);"><i class="iconfont icon-dongtai icon-right"></i>发动态</a></li>
+        <li class="pic"><a data-action="pic" href="javascript:void(0);"><i class="iconfont icon-photo icon-right"></i><span>发照片<span></a></li>
+        <li class="video"><a data-action="video" href="javascript:void(0);"><i class="iconfont icon-video icon-right"></i>发视频</a></li>
+        <li class="link"><a data-action="link" href="javascript:void(0);"><i class="iconfont icon-link icon-right"></i>推荐网页</a></li>
+      </ul>
+      <div class="activity-content">
+        <label id="label" for="text">分享我的动态...</label>
+        <textarea data-minheight="70" id="text" name="text" rows="1"></textarea>
+      </div>
+      <div class="upload-form acting">
+        <div class="bd">
+          <div class="upload-section">
+            <p class="drag-tip"><i class="iconfont icon-Drag-Drop"></i>拖图到框里上传</p>
+            <a href="javascript: void 0;" class="upload-btn">
+              <i class="iconfont icon-photoadd icon-big"></i>
+              <span class="upload-info">上传照片</span></a>
+            <p>按住command键可最多选中<span class=""></span>张</p>
+          </div>
+        </div>
+        <a href="javascript:void(0);" class="upload-cancel">×</a>
+      </div>
+      <div class="btn">
+        <button type="submit" class="pure-button activity-btn">发布</button>
+      </div>
+    </form>
+    <div class="pure-button-group btn-group">
+      <form charset="utf-8" id="upload" data-action="pic" action="/j/upload" enctype="multipart/form-data" method="post">
+        <input id="upload-inp" autocomplete="off" data-action="pic" name="image" title="可传多张照片" type="file" multiple="" accept="image/jpg,image/jpeg,image/bmp,image/gif,image/png,">
+      </form>
+      <a href="javascript:void(0);" data-action="pic" class="iconfont icon-photo1" title="上传照片"><span class="ico">照片</span></a>
+      <a href="javascript:void(0);" data-action="video" class="iconfont icon-video1" title="上传视频"><span class="ico">视频<span></a>
+    </div>
+  </div>
+</div>
+<div id="aside"></div>
+</%def>
+
+<%def name="pagination()">
+</%def>
+
+<%def name="title()">动态 - ${ SITE_TITLE }</%def>
+
+<%def name="bottom_script()">
+<script src="${ app.url_for('static', filename='js/jquery.fileupload.js')}"></script>
+<script src="${ app.url_for('static', filename='dist/blog/activity.js')}"></script>
+</%def>

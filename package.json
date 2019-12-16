@@ -30,7 +30,10 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
+    "blueimp-file-upload": "^10.4.0",
+    "canvas-to-blob": "^1.0.0",
     "jquery": "^3.3.1",
+    "jquery-ui": "^1.12.1",
     "tributejs": "^4.1.1",
     "uikit": "^3.0.0-rc.25"
   }

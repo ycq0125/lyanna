@@ -1,0 +1,17 @@
+<%inherit file="/base.html" />
+
+<%def name="doc_head()">
+  <link rel="stylesheet" href="${ app.url_for('static', filename='css/activity.min.css') } ">
+</%def>
+
+<%def name="content()">
+</%def>
+
+<%def name="pagination()">
+</%def>
+
+<%def name="title()">${ tag.name } - ${ SITE_TITLE }</%def>
+
+<%def name="bottom_script()">
+  <script src="${ app.url_for('static', filename='dist/blog/activity.js')}"></script>
+</%def>
