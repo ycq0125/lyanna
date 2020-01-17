@@ -26,6 +26,7 @@ from models.mc import cache
 from models.consts import STATIC_FILE_TYPES
 from models.var import memcache_var, redis_var
 from views.request import Request
+from libs.log import LOGGING_CONFIG, context
 
 
 async def retrieve_user(request: Request, payload: Optional[Any],
@@ -131,6 +132,8 @@ async def setup_context(request: Request) -> None:
             config.REDIS_URL, minsize=5, maxsize=20, loop=loop)
     redis_var.set(redis)
     memcache_var.set(client)
+    if config.ENABLE_DEBUG_LOG:
+        context.set('start_time', datetime.now())
 
 
 @cache(MC_KEY_SITEMAP)
@@ -162,4 +165,14 @@ async def sitemap(request):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=config.DEBUG)
+    import uvloop
+    asyncio.set_event_loop(uvloop.new_event_loop())
+    server = app.create_server(host="0.0.0.0", port=8000, return_asyncio_server=True)
+    loop = asyncio.get_event_loop()
+    loop.set_task_factory(context.task_factory)
+    task = asyncio.ensure_future(server)
+    try:
+        loop.run_forever(log_config=LOGGING_CONFIG)
+    except:
+        loop.stop()
+    app.run(host='0.0.0.0', port=8000, debug=config.DEBUG, log_config=LOGGING_CONFIG)
